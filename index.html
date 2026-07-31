@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NaturaGlow | Real Beauty, Real Ingredients</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            cream: '#FFFFF0',
+                            olive: '#525B2C',
+                            sage: '#808B52',
+                            darkgreen: '#2B311B',
+                            accent: '#6B773A'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-header {
+            background: rgba(255, 255, 240, 0.92);
+            backdrop-filter: blur(12px);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        .drawer-slide {
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="bg-brand-cream text-brand-darkgreen font-sans antialiased selection:bg-brand-sage selection:text-white">
+
+    <!-- Announcement Bar -->
+    <div class="bg-brand-darkgreen text-brand-cream text-xs font-bold py-2.5 px-4 text-center tracking-wide uppercase flex items-center justify-center gap-2 relative overflow-hidden">
+        <span class="animate-pulse"><i class="fa-solid fa-sparkles text-brand-sage"></i></span>
+        <span>FINAL PRESENTATION SPECIAL: GET 25% OFF TODAY WITH CODE <span class="underline decoration-wavy text-brand-sage">NATURAGLOW25</span></span>
+        <span class="animate-pulse"><i class="fa-solid fa-sparkles text-brand-sage"></i></span>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 glass-header border-b border-brand-olive/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-brand-olive shadow-sm group-hover:scale-105 transition-transform bg-white flex items-center justify-center">
+                    <svg viewBox="0 0 200 200" class="w-full h-full">
+                        <circle cx="100" cy="100" r="95" fill="#FFFFF0"/>
+                        <path d="M 60 100 C 60 50, 140 50, 140 100 C 140 150, 60 150, 60 100" fill="none" stroke="#525B2C" stroke-width="2"/>
+                        <text x="100" y="115" font-family="'Playfair Display', serif" font-size="65" font-weight="bold" fill="#525B2C" text-anchor="middle">N</text>
+                        <path d="M 50 80 Q 30 110 70 125 Q 60 90 50 80 Z" fill="#808B52"/>
+                    </svg>
+                </div>
+                <div>
+                    <span class="font-serif text-2xl font-bold tracking-tight text-brand-darkgreen block leading-none">Natura<span class="text-brand-sage italic">Glow</span></span>
+                    <span class="text-[9px] uppercase tracking-widest font-semibold text-brand-olive">Real Beauty, Real Ingredients</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Menu -->
+            <nav class="hidden md:flex items-center gap-8 font-semibold text-sm">
+                <a href="#hero" class="hover:text-brand-sage transition-colors">Home</a>
+                <a href="#offers" class="hover:text-brand-sage transition-colors flex items-center gap-1.5">
+                    Special Offers <span class="bg-brand-sage text-white text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Hot</span>
+                </a>
+                <a href="#products" class="hover:text-brand-sage transition-colors">Product Line</a>
+                <a href="#about" class="hover:text-brand-sage transition-colors">About Us</a>
+            </nav>
+
+            <!-- Action Buttons -->
+            <div class="hidden md:flex items-center gap-5">
+                <button onclick="toggleCheckout()" class="relative text-brand-darkgreen hover:text-brand-sage transition-colors p-2">
+                    <i class="fa-solid fa-bag-shopping text-2xl"></i>
+                    <span id="cart-count" class="absolute top-0 right-0 bg-brand-olive text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">0</span>
+                </button>
+                <button onclick="toggleCheckout('checkout')" class="bg-brand-olive hover:bg-brand-darkgreen text-white px-6 py-2.5 rounded-full font-bold text-sm shadow-md shadow-brand-olive/20 hover:shadow-lg transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+                    <i class="fa-solid fa-lock text-xs"></i> Express Checkout
+                </button>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-2xl text-brand-darkgreen focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-cream border-b border-brand-olive/10 px-6 py-4 flex flex-col gap-4 font-semibold shadow-inner">
+            <a href="#hero" onclick="toggleMobileMenu()" class="py-1">Home</a>
+            <a href="#offers" onclick="toggleMobileMenu()" class="py-1">Special Offers</a>
+            <a href="#products" onclick="toggleMobileMenu()" class="py-1">Product Line</a>
+            <button onclick="toggleMobileMenu(); toggleCheckout()" class="bg-brand-olive text-white py-3 rounded-xl font-bold w-full mt-2">
+                Checkout / Cart
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative overflow-hidden py-16 lg:py-24">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <div class="inline-flex items-center gap-2 bg-brand-olive/10 text-brand-darkgreen px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider">
+                    <i class="fa-solid fa-leaf text-brand-sage"></i> 100% Organic & Botanical Formula
+                </div>
+                <h1 class="font-serif text-5xl lg:text-6xl font-bold leading-tight text-brand-darkgreen">
+                    Unlock Your Inner <span class="text-brand-sage italic underline decoration-brand-olive/30">Radiance.</span>
+                </h1>
+                <p class="text-brand-darkgreen/80 text-lg leading-relaxed max-w-xl">
+                    Crafted with nature's purest botanicals—rosewater, aloe vera, honey, and natural oils designed to nourish and revitalize your skin naturally.
+                </p>
+                <div class="flex flex-wrap items-center gap-4 pt-2">
+                    <a href="#products" class="bg-brand-olive hover:bg-brand-darkgreen text-white px-8 py-4 rounded-full font-bold shadow-lg shadow-brand-olive/20 hover:shadow-xl transition-all transform hover:-translate-y-1 flex items-center gap-3">
+                        Shop Our Collection <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Hero Product Card with Actual Bottle Aesthetic -->
+            <div class="relative flex justify-center">
+                <div class="w-80 h-96 lg:w-96 lg:h-[480px] bg-white rounded-3xl p-4 shadow-2xl border border-brand-olive/20 relative flex flex-col justify-end animate-float overflow-hidden">
+                    <img src="Gemini_Generated_Image_ag6a3hag6a3hag6a.png" alt="Botanical Facial Toner" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-darkgreen/90 via-brand-darkgreen/20 to-transparent"></div>
+                    <div class="bg-white/95 backdrop-blur-md p-5 rounded-2xl shadow-xl border border-white relative z-10">
+                        <span class="text-[10px] font-bold bg-brand-sage text-white px-2 py-0.5 rounded uppercase">Signature Item</span>
+                        <h3 class="font-serif font-bold text-xl text-brand-darkgreen mt-1">Botanical Facial Toner</h3>
+                        <p class="text-xs text-brand-olive font-semibold mt-0.5">Rosewater, Aloe Vera & Green Tea</p>
+                        <div class="flex items-center justify-between mt-3">
+                            <span class="font-bold text-lg text-brand-darkgreen">$24.00</span>
+                            <button onclick="addToCart('Botanical Facial Toner', 24.00)" class="bg-brand-olive text-white px-4 py-2 rounded-full font-bold text-xs hover:bg-brand-sage transition-colors shadow-md flex items-center gap-1.5">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offers -->
+    <section id="offers" class="py-16 bg-brand-darkgreen text-brand-cream relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-brand-sage font-bold uppercase tracking-widest text-xs">Limited Time Bundles</span>
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold mt-2 text-white">Exclusive Skincare Sets</h2>
+                </div>
+                <div class="mt-4 md:mt-0 flex items-center gap-3 bg-white/10 px-5 py-2.5 rounded-2xl backdrop-blur-md border border-white/10">
+                    <span class="text-xs uppercase font-bold tracking-wider text-brand-cream">Offer Expires In:</span>
+                    <div id="timer" class="font-mono font-extrabold text-brand-sage text-xl">06:14:22</div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Bundle 1 -->
+                <div class="bg-white text-brand-darkgreen rounded-3xl p-6 shadow-xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+                    <span class="bg-brand-sage text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Save 25%</span>
+                    <h3 class="font-serif text-xl font-bold mt-4 text-brand-darkgreen">Complete Hydration Trio</h3>
+                    <p class="text-sm text-gray-600 mt-2">Facial Toner + Moisturizing Cream + Hyaluronic Acid Serum.</p>
+                    <div class="mt-6 flex items-baseline gap-3">
+                        <span class="text-3xl font-extrabold text-brand-olive">$69.00</span>
+                        <span class="text-sm text-gray-400 line-through">$92.00</span>
+                    </div>
+                    <button onclick="addToCart('Complete Hydration Trio', 69.00)" class="w-full mt-6 bg-brand-olive hover:bg-brand-sage text-white py-3.5 rounded-xl font-bold transition-colors shadow-md">
+                        Add Bundle to Cart
+                    </button>
+                </div>
+
+                <!-- Bundle 2 -->
+                <div class="bg-white text-brand-darkgreen rounded-3xl p-6 shadow-xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300 border-2 border-brand-sage">
+                    <span class="bg-brand-olive text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Best Seller</span>
+                    <h3 class="font-serif text-xl font-bold mt-4 text-brand-darkgreen">Daily Glow Essentials</h3>
+                    <p class="text-sm text-gray-600 mt-2">Facial Cleanser Bar + Vitamin C Serum + Sunscreen SPF 50.</p>
+                    <div class="mt-6 flex items-baseline gap-3">
+                        <span class="text-3xl font-extrabold text-brand-olive">$62.00</span>
+                        <span class="text-sm text-gray-400 line-through">$81.00</span>
+                    </div>
+                    <button onclick="addToCart('Daily Glow Essentials', 62.00)" class="w-full mt-6 bg-brand-sage hover:bg-brand-darkgreen text-white py-3.5 rounded-xl font-bold transition-colors shadow-md">
+                        Add Bundle to Cart
+                    </button>
+                </div>
+
+                <!-- Bundle 3 -->
+                <div class="bg-white text-brand-darkgreen rounded-3xl p-6 shadow-xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+                    <span class="bg-brand-sage text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Full Collection</span>
+                    <h3 class="font-serif text-xl font-bold mt-4 text-brand-darkgreen">NaturaGlow Master Set</h3>
+                    <p class="text-sm text-gray-600 mt-2">All 6 organic skincare products included at a special discount.</p>
+                    <div class="mt-6 flex items-baseline gap-3">
+                        <span class="text-3xl font-extrabold text-brand-olive">$125.00</span>
+                        <span class="text-sm text-gray-400 line-through">$160.00</span>
+                    </div>
+                    <button onclick="addToCart('NaturaGlow Master Set', 125.00)" class="w-full mt-6 bg-brand-olive hover:bg-brand-sage text-white py-3.5 rounded-xl font-bold transition-colors shadow-md">
+                        Add Bundle to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Grid (Actual NaturaGlow Products) -->
+    <section id="products" class="py-20 max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-14">
+            <span class="text-brand-sage font-bold uppercase tracking-wider text-xs">Real Beauty, Real Ingredients</span>
+            <h2 class="font-serif text-4xl font-bold mt-2 text-brand-darkgreen">Our Organic Skincare Line</h2>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- 1. Facial Toner -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm hover:shadow-xl transition-all border border-gray-100 flex flex-col justify-between group">
+                <div>
+                    <div class="h-64 rounded-2xl overflow-hidden relative mb-4">
+                        <img src="Gemini_Generated_Image_wkgicewkgicewkgi.png" alt="Facial Toner" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-brand-darkgreen/80 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">Organic</span>
+                    </div>
+                    <h4 class="font-serif font-bold text-xl text-brand-darkgreen">Facial Toner</h4>
+                    <p class="text-xs text-brand-olive font-semibold mt-1"><i class="fa-solid fa-leaf text-brand-sage"></i> Rosewater, Aloe Vera, Green Tea & Honey</p>
+                    <p class="text-xs text-gray-500 mt-2">Balances skin pH while providing gentle hydration and pore tightening.</p>
+                </div>
+                <div class="mt-6 flex items-center justify-between border-t border-gray-100 pt-4">
+                    <span class="font-extrabold text-brand-olive text-xl">$24.00</span>
+                    <button onclick="addToCart('Facial Toner', 24.00)" class="bg-brand-cream hover:bg-brand-olive hover:text-white text-brand-darkgreen font-bold px-5 py-2.5 rounded-xl transition-all border border-brand-olive/20 text-xs flex items-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- 2. Moisturizing Cream -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm hover:shadow-xl transition-all border border-gray-100 flex flex-col justify-between group">
+                <div>
+                    <div class="h-64 rounded-2xl overflow-hidden relative mb-4">
+                        <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?q=80&w=600&auto=format&fit=crop" alt="Moisturizing Cream" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-brand-darkgreen/80 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">Deep Hydration</span>
+                    </div>
+                    <h4 class="font-serif font-bold text-xl text-brand-darkgreen">Moisturizing Cream</h4>
+                    <p class="text-xs text-brand-olive font-semibold mt-1"><i class="fa-solid fa-leaf text-brand-sage"></i> Aloe Vera, Coconut Oil, Rosehip & Honey</p>
+                    <p class="text-xs text-gray-500 mt-2">Rich cream that restores skin elasticity and locks in moisture all day.</p>
+                </div>
+                <div class="mt-6 flex items-center justify-between border-t border-gray-100 pt-4">
+                    <span class="font-extrabold text-brand-olive text-xl">$32.00</span>
+                    <button onclick="addToCart('Moisturizing Cream', 32.00)" class="bg-brand-cream hover:bg-brand-olive hover:text-white text-brand-darkgreen font-bold px-5 py-2.5 rounded-xl transition-all border border-brand-olive/20 text-xs flex items-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3. Natural Sunscreen -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm hover:shadow-xl transition-all border border-gray-100 flex flex-col justify-between group">
+                <div>
+                    <div class="h-64 rounded-2xl overflow-hidden relative mb-4">
+                        <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?q=80&w=600&auto=format&fit=crop" alt="Natural Sunscreen" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-brand-darkgreen/80 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">SPF Protection</span>
+                    </div>
+                    <h4 class="font-serif font-bold text-xl text-brand-darkgreen">Natural Sunscreen</h4>
+                    <p class="text-xs text-brand-olive font-semibold mt-1"><i class="fa-solid fa-leaf text-brand-sage"></i> Coconut Oil, Carrot Seed Oil, Rosehip & Aloe</p>
+                    <p class="text-xs text-gray-500 mt-2">Shields against UV rays naturally without leaving a greasy white residue.</p>
+                </div>
+                <div class="mt-6 flex items-center justify-between border-t border-gray-100 pt-4">
+                    <span class="font-extrabold text-brand-olive text-xl">$28.00</span>
+                    <button onclick="addToCart('Natural Sunscreen', 28.00)" class="bg-brand-cream hover:bg-brand-olive hover:text-white text-brand-darkgreen font-bold px-5 py-2.5 rounded-xl transition-all border border-brand-olive/20 text-xs flex items-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- 4. Facial Cleanser Bar -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm hover:shadow-xl transition-all border border-gray-100 flex flex-col justify-between group">
+                <div>
+                    <div class="h-64 rounded-2xl overflow-hidden relative mb-4">
+                        <img src="ClearFaceCleansingBarMoroccanPinkClay_751_C_1250x1876.webp" alt="Facial Cleanser Soap" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-brand-darkgreen/80 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">Gentle Bar</span>
+                    </div>
+                    <h4 class="font-serif font-bold text-xl text-brand-darkgreen">Facial Soap Bar</h4>
+                    <p class="text-xs text-brand-olive font-semibold mt-1"><i class="fa-solid fa-leaf text-brand-sage"></i> Honey, Aloe Vera, Oatmeal & Calendula</p>
+                    <p class="text-xs text-gray-500 mt-2">Gently cleanses and exfoliates impurities while soothing inflammation.</p>
+                </div>
+                <div class="mt-6 flex items-center justify-between border-t border-gray-100 pt-4">
+                    <span class="font-extrabold text-brand-olive text-xl">$16.00</span>
+                    <button onclick="addToCart('Facial Soap Bar', 16.00)" class="bg-brand-cream hover:bg-brand-olive hover:text-white text-brand-darkgreen font-bold px-5 py-2.5 rounded-xl transition-all border border-brand-olive/20 text-xs flex items-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- 5. Vitamin C Serum -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm hover:shadow-xl transition-all border border-gray-100 flex flex-col justify-between group">
+                <div>
+                    <div class="h-64 rounded-2xl overflow-hidden relative mb-4">
+                        <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=600&auto=format&fit=crop" alt="Vitamin C Facial" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-brand-darkgreen/80 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">Brightening</span>
+                    </div>
+                    <h4 class="font-serif font-bold text-xl text-brand-darkgreen">Vitamin C Serum</h4>
+                    <p class="text-xs text-brand-olive font-semibold mt-1"><i class="fa-solid fa-leaf text-brand-sage"></i> Orange/Lemon, Aloe Vera & Rosewater</p>
+                    <p class="text-xs text-gray-500 mt-2">Boosts skin radiance, evens out tone, and provides antioxidant protection.</p>
+                </div>
+                <div class="mt-6 flex items-center justify-between border-t border-gray-100 pt-4">
+                    <span class="font-extrabold text-brand-olive text-xl">$35.00</span>
+                    <button onclick="addToCart('Vitamin C Serum', 35.00)" class="bg-brand-cream hover:bg-brand-olive hover:text-white text-brand-darkgreen font-bold px-5 py-2.5 rounded-xl transition-all border border-brand-olive/20 text-xs flex items-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- 6. Hyaluronic Acid Serum -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm hover:shadow-xl transition-all border border-gray-100 flex flex-col justify-between group">
+                <div>
+                    <div class="h-64 rounded-2xl overflow-hidden relative mb-4">
+                        <img src="https://images.unsplash.com/photo-1617897903246-719242758050?q=80&w=600&auto=format&fit=crop" alt="Hyaluronic Acid Serum" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-brand-darkgreen/80 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">Plumping</span>
+                    </div>
+                    <h4 class="font-serif font-bold text-xl text-brand-darkgreen">Hyaluronic Acid Serum</h4>
+                    <p class="text-xs text-brand-olive font-semibold mt-1"><i class="fa-solid fa-leaf text-brand-sage"></i> Aloe Vera, Rosewater & Chia Seeds</p>
+                    <p class="text-xs text-gray-500 mt-2">Intense natural moisture booster for smooth, supple, and firm skin.</p>
+                </div>
+                <div class="mt-6 flex items-center justify-between border-t border-gray-100 pt-4">
+                    <span class="font-extrabold text-brand-olive text-xl">$36.00</span>
+                    <button onclick="addToCart('Hyaluronic Acid Serum', 36.00)" class="bg-brand-cream hover:bg-brand-olive hover:text-white text-brand-darkgreen font-bold px-5 py-2.5 rounded-xl transition-all border border-brand-olive/20 text-xs flex items-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-darkgreen text-white/80 py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full overflow-hidden border border-brand-sage bg-white flex items-center justify-center">
+                    <svg viewBox="0 0 200 200" class="w-full h-full">
+                        <circle cx="100" cy="100" r="95" fill="#FFFFF0"/>
+                        <text x="100" y="115" font-family="'Playfair Display', serif" font-size="65" font-weight="bold" fill="#525B2C" text-anchor="middle">N</text>
+                    </svg>
+                </div>
+                <span class="font-serif text-xl font-bold text-white">NaturaGlow</span>
+            </div>
+            <p class="text-xs text-white/50">© 2026 NaturaGlow Organic Skincare. All rights reserved.</p>
+            <div class="flex gap-4 text-lg text-white/70">
+                <a href="#" class="hover:text-brand-sage transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-brand-sage transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Drawer -->
+    <div id="checkout-drawer-overlay" onclick="toggleCheckout()" class="fixed inset-0 bg-brand-darkgreen/50 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300"></div>
+
+    <div id="checkout-drawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-50 transform translate-x-full drawer-slide flex flex-col overflow-y-auto">
+        <div class="bg-brand-cream px-6 py-5 border-b border-brand-olive/10 flex items-center justify-between sticky top-0 z-10">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-lock text-brand-olive"></i>
+                <h3 class="font-serif font-bold text-lg text-brand-darkgreen">Secure Checkout</h3>
+            </div>
+            <button onclick="toggleCheckout()" class="text-gray-400 hover:text-brand-darkgreen text-xl p-1">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="p-6 space-y-6 flex-grow">
+            <div class="flex bg-brand-cream p-1 rounded-xl font-bold text-xs border border-brand-olive/10">
+                <button id="tab-checkout-btn" onclick="switchTab('checkout')" class="flex-1 py-2 rounded-lg bg-white shadow-sm text-brand-darkgreen transition-all">Quick Checkout</button>
+                <button id="tab-register-btn" onclick="switchTab('register')" class="flex-1 py-2 rounded-lg text-gray-500 hover:text-brand-darkgreen transition-all">Register & Join</button>
+            </div>
+
+            <!-- Register -->
+            <div id="tab-register" class="hidden space-y-4">
+                <div class="bg-brand-olive/10 p-4 rounded-xl text-xs text-brand-darkgreen flex items-start gap-2">
+                    <i class="fa-solid fa-gift text-brand-sage text-base mt-0.5"></i>
+                    <span>Create an account to earn <strong>100 Glow Points</strong> and unlock 1-click checkout!</span>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Full Name</label>
+                    <input type="text" placeholder="Jane Doe" class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-brand-olive">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Email</label>
+                    <input type="email" placeholder="jane@example.com" class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-brand-olive">
+                </div>
+                <button class="w-full bg-brand-darkgreen text-white py-3.5 rounded-xl font-bold hover:bg-brand-olive transition-colors text-sm shadow-md">
+                    Create Account
+                </button>
+            </div>
+
+            <!-- Checkout -->
+            <div id="tab-checkout" class="space-y-5">
+                <div class="bg-brand-cream p-4 rounded-xl border border-brand-olive/10 space-y-2">
+                    <div class="flex justify-between text-xs font-bold text-gray-500 uppercase tracking-wider">
+                        <span>Cart Items</span>
+                        <span id="cart-item-count">0 Items</span>
+                    </div>
+                    <div id="cart-items-list" class="text-xs text-gray-600 space-y-1">
+                        <p class="italic text-gray-400">Your cart is empty.</p>
+                    </div>
+                    <div class="border-t border-gray-200 pt-2 flex justify-between font-bold text-sm text-brand-darkgreen">
+                        <span>Total:</span>
+                        <span id="cart-total">$0.00</span>
+                    </div>
+                </div>
+
+                <form onsubmit="handlePayment(event)" class="space-y-3">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Cardholder Name</label>
+                        <input type="text" required placeholder="Jane Doe" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Card Number</label>
+                        <input type="text" required maxlength="19" placeholder="4532 •••• •••• 8892" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Exp Date</label>
+                            <input type="text" required placeholder="MM/YY" maxlength="5" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">CVV</label>
+                            <input type="password" required placeholder="123" maxlength="4" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm">
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full bg-brand-olive hover:bg-brand-darkgreen text-white py-4 rounded-xl font-bold transition-colors text-sm shadow-lg mt-4 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-shield-halved"></i> Complete Purchase
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Logic -->
+    <script>
+        let cart = [];
+        let total = 0;
+
+        function addToCart(title, price) {
+            cart.push({ title, price });
+            total += price;
+            updateCartUI();
+            toggleCheckout('checkout', true);
+        }
+
+        function updateCartUI() {
+            document.getElementById('cart-count').innerText = cart.length;
+            document.getElementById('cart-item-count').innerText = cart.length + " Items";
+            document.getElementById('cart-total').innerText = "$" + total.toFixed(2);
+
+            const list = document.getElementById('cart-items-list');
+            if (cart.length === 0) {
+                list.innerHTML = '<p class="italic text-gray-400">Your cart is empty.</p>';
+            } else {
+                list.innerHTML = cart.map(item => `
+                    <div class="flex justify-between items-center border-b border-gray-100 py-1">
+                        <span class="font-semibold text-gray-700">${item.title}</span>
+                        <span class="font-bold text-brand-olive">$${item.price.toFixed(2)}</span>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function toggleCheckout(tab = 'checkout', openOnly = false) {
+            const drawer = document.getElementById('checkout-drawer');
+            const overlay = document.getElementById('checkout-drawer-overlay');
+            
+            if (openOnly || drawer.classList.contains('translate-x-full')) {
+                overlay.classList.remove('hidden');
+                setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+                drawer.classList.remove('translate-x-full');
+                switchTab(tab);
+            } else {
+                overlay.classList.add('opacity-0');
+                drawer.classList.add('translate-x-full');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+            }
+        }
+
+        function switchTab(tab) {
+            const checkoutTab = document.getElementById('tab-checkout');
+            const registerTab = document.getElementById('tab-register');
+            const checkoutBtn = document.getElementById('tab-checkout-btn');
+            const registerBtn = document.getElementById('tab-register-btn');
+
+            if (tab === 'checkout') {
+                checkoutTab.classList.remove('hidden');
+                registerTab.classList.add('hidden');
+                checkoutBtn.className = "flex-1 py-2 rounded-lg bg-white shadow-sm text-brand-darkgreen transition-all";
+                registerBtn.className = "flex-1 py-2 rounded-lg text-gray-500 hover:text-brand-darkgreen transition-all";
+            } else {
+                registerTab.classList.remove('hidden');
+                checkoutTab.classList.add('hidden');
+                registerBtn.className = "flex-1 py-2 rounded-lg bg-white shadow-sm text-brand-darkgreen transition-all";
+                checkoutBtn.className = "flex-1 py-2 rounded-lg text-gray-500 hover:text-brand-darkgreen transition-all";
+            }
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function handlePayment(e) {
+            e.preventDefault();
+            if (cart.length === 0) {
+                alert('Your cart is empty. Please add a product first.');
+                return;
+            }
+            alert('Thank you for your purchase with NaturaGlow! Your order has been placed.');
+            cart = [];
+            total = 0;
+            updateCartUI();
+            toggleCheckout();
+        }
+    </script>
+</body>
+</html>
